@@ -69,6 +69,26 @@ install_stage=(
     xfce4-settings
     nwg-look-bin
     sddm
+    netcat
+)
+
+propertary_fonts=(
+    bdf-unifont
+    gnu-free-fonts
+    ttf-ms-fonts
+    ttf-croscore
+    ttf-fira-code
+    ttf-jetbrains-mono
+    ttf-google-fonts-git
+    ttf-opensans
+    ttf-opensans
+    ttf-font-awesome
+)
+
+wireguard_packages=(
+    wireguard-tools
+    wg-client
+    wg_tool
 )
 
 for str in ${myArray[@]}; do
@@ -251,6 +271,48 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
     # Clean out other portals
     echo -e "$CNT - Cleaning out conflicting xdg portals..."
     yay -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk &>> $INSTLOG
+fi
+
+### Install all of the above pacakges ####
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the zoom? (y,n) ' INST
+if [[ $INST == "Y" || $INST == "y" ]]; then
+    # Installing package
+    echo -e "Stage - Installing needed components, this may take a while..."
+    install_software zoom
+fi
+
+### Install all of the above pacakges ####
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the discord? (y,n) ' INST
+if [[ $INST == "Y" || $INST == "y" ]]; then
+    # Installing package
+    echo -e "Stage - Installing needed components, this may take a while..."
+    install_software discord
+fi
+
+### Install all of the above pacakges ####
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the chrome? (y,n) ' INST
+if [[ $INST == "Y" || $INST == "y" ]]; then
+    # Installing package
+    echo -e "Stage - Installing needed components, this may take a while..."
+    install_software google-chrome
+fi
+
+### Install all of the above pacakges ####
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the propertary fonts? (y,n) ' INST
+if [[ $INST == "Y" || $INST == "y" ]]; then
+    echo -e "Installing main components, this may take a while..."
+    for SOFTWR in ${propertary_fonts[@]}; do
+        install_software $SOFTWR 
+    done
+fi
+
+### Install all of the above pacakges ####
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the wireguard? (y,n) ' INST
+if [[ $INST == "Y" || $INST == "y" ]]; then
+    echo -e "Installing main components, this may take a while..."
+    for SOFTWR in ${wireguard_packages[@]}; do
+        install_software $SOFTWR 
+    done
 fi
 
 ### Copy Config Files ###
